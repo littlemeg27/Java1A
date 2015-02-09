@@ -59,23 +59,18 @@ public class MainActivity extends ActionBarActivity
                 if (!arrayList.contains(addItem))
                 {
                     arrayList.add(addItem); //Add item to the array list
-                    Log.i("Title", addItem);
                     addWordText.setText(""); //Reset the word text box
 
                     letter = addItem.length(); //Find out the length word
-                    //Log.i("letter count", letter + "");
 
                     count = count + letter; //Find out the total count of the letters
-                    //Log.i("total count", count + "");
                 }
 
                 word = arrayList.size(); //Find the word count
-                //Log.i("word count", word + "");
                 wordTextBox.setText(String.valueOf("Number Of Words: " + word)); //Put the text into the text view
 
                 average = count / word; //Find the average of the letters
-                //Log.i("average count", average + "");
-                averageTextBox.setText(String.valueOf("Average Letter Count: " + average)); //Put the text into the text view
+                averageTextBox.setText(String.valueOf("Average Letter's: " + average)); //Put the text into the text view
 
             }
 
@@ -97,13 +92,13 @@ public class MainActivity extends ActionBarActivity
 
                     if (!arrayList.contains(addItem)) //Check to see if there are items inside of the arraylist
                     {
-                        String theWord = "";
+                        String arrayWord = "";
 
-                        theWord = (String) arrayList.get(index); //Get the word from the index
+                        arrayWord = (String) arrayList.get(index); //Get the word from the index
 
                         AlertDialog.Builder dialog = new AlertDialog.Builder(mContext); //Alert set for the index
                         dialog.setTitle("Picked an Index");
-                        dialog.setMessage("Index pick of the ArrayList: " + theWord);
+                        dialog.setMessage("Index picked: " + arrayWord);
                         dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener()
                         {
                             @Override
@@ -132,7 +127,7 @@ public class MainActivity extends ActionBarActivity
 
                     });
                     dialog.show();
-                }
+                }//End of else
             } //End of onClick
 
         }); //End of second Button
