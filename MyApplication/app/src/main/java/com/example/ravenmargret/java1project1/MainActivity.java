@@ -1,3 +1,5 @@
+//Created Brenna Pavlinchak 2/2/2015
+
 package com.example.ravenmargret.java1project1;
 
 import android.app.AlertDialog;
