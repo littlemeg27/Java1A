@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".It_worked">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addWordText"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/addButton"
+        android:layout_alignEnd="@+id/addWordText"
+        android:layout_alignLeft="@+id/addButton"
+        android:layout_alignStart="@+id/addWordText" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Word"
+        android:id="@+id/addButton"
+        android:layout_below="@+id/addWordText"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/indexText"
+        android:layout_marginTop="86dp"
+        android:layout_below="@+id/addButton"
+        android:layout_alignRight="@+id/addButton"
+        android:layout_alignEnd="@+id/addButton"
+        android:layout_alignLeft="@+id/indexButton"
+        android:layout_alignStart="@+id/indexButton" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Index"
+        android:id="@+id/indexButton"
+        android:layout_below="@+id/indexText"
+        android:layout_alignRight="@+id/addButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Word Count"
+        android:id="@+id/wordTextBox"
+        android:layout_below="@+id/indexButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="77dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Average Letter Count "
+        android:id="@+id/averageTextBox"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="78dp" />
+
+
+</RelativeLayout>
