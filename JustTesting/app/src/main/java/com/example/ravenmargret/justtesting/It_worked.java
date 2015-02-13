@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -109,7 +110,22 @@ public class It_worked extends ActionBarActivity
                             }
 
                         });
+                        dialog.setNegativeButton("Remove", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                arrayList.remove(index);
+
+                                word = arrayList.size(); //Find the word count
+                                //Log.i("word count", wordCount + "");
+                                wordTextBox.setText(String.valueOf("Word Count: " + word)); //Put the text into the text view
+
+                            }
+
+
+                        });
+
                         dialog.show();
+
                     }
 
                 }//End of if
