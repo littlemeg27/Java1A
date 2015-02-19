@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Java1Project3</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="spinnerArray">
+        <item>Golden Retriever</item>
+        <item>Standard Poodle</item>
+        <item>Greyhound</item>
+        <item>Great Dane</item>
+        <item>Alaskan Malamute</item>
+        <item>Giant Schnauzer</item>
+        <item>Airedale Terrier</item>
+    </string-array>
+</resources>
