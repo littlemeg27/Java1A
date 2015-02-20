@@ -3,22 +3,29 @@
 package com.example.ravenmargret.java1project3;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Map;
+
+
 
 public class Adapter extends BaseAdapter
 {
-    Context mContext;
-    private static final int ID_CONSTANT = 0x1000000;
 
-    public Adapter(Context d, ArrayList objects)
+    Context mContext;
+    ArrayList<Dogs> mObjects;
+
+    public Adapter(Context d, ArrayList<Dogs> objects)
     {
         mContext = d;
+        mObjects = objects;
     }
+
+    private static final int ID_CONSTANT = 0x01000000;
 
     @Override
     public int getCount()
@@ -34,44 +41,42 @@ public class Adapter extends BaseAdapter
         }
     }
 
+
     @Override
-    public Object getItem(int position)
+    public long getItemId(int position)
+    {
+        return ID_CONSTANT + position;
+    }
+
+    @Override
+    public Dogs getItem(int position)
     {
         if(mObjects != null && position < mObjects.size() && position >= 0)
         {
-            int count = 0;
-            String key = "";
-
-            for(Map.Entry<String, Dogs> entry: mObjects.entrySet())
-            {
-                if(count == position)
-                {
-                    key = entry.getKey();
-                }
-                count++;
-            }
-
-            count = 0;
-
-            return mObjects.get(key);
+            return  mObjects.get(position);
         }
-
         else
         {
             return null;
         }
     }
 
-
     @Override
-    public long getItemId(int position)
-    {
-        return 0;
-    }
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) //No recycled view create new
+        {
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.item_layout, parent, false);
+        }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
+        Dogs item = getItem(position);
+
+        ((TextView) convertView.findViewById(R.id.breed)).setText(item.getBreed());
+        ((TextView) convertView.findViewById(R.id.type)).setText(item.getType());
+        ((TextView) convertView.findViewById(R.id.hairType)).setText(item.getHairType());
+        ((TextView) convertView.findViewById(R.id.color)).setText(item.getColor());
+        ((TextView) convertView.findViewById(R.id.temperament)).setText(item.getTemperament());
+        ((TextView) convertView.findViewById(R.id.age)).setText(item.getAge());
+
         return convertView;
     }
 

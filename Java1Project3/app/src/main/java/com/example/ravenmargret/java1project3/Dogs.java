@@ -2,9 +2,6 @@
 
 package com.example.ravenmargret.java1project3;
 
-/**
- * Created by ravenmargret on 2/19/15.
- */
 public class Dogs
 {
     private  String breed; //All the private variables

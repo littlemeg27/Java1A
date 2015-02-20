@@ -76,17 +76,21 @@ public class MainActivity extends ActionBarActivity
         }
         else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
         {
-            final Adapter theAdapter = new Adapter(mContext, dogs);
+            final Adapter theAdapter = new Adapter(this, android.R.layout.simple_list_item_1, dogs);
             listView.setAdapter(theAdapter);
+
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
             {
+
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                public void onItemClick(AdapterView<?> parent, final View view,
+                                        int position, long id)
                 {
                     ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, simple_list_item_1, dogs);
 
                     listView.setAdapter(arrayAdapter);
                 }
+
             });
         }
 
