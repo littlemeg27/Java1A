@@ -37,9 +37,7 @@ public class MainActivity extends ActionBarActivity
     ListView listView;
     Spinner theSpinner;
     ArrayList dogs;
-    int dogsIndex;
     ArrayAdapter<String> spinnerAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -76,10 +74,10 @@ public class MainActivity extends ActionBarActivity
         }
         else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
         {
-            final Adapter theAdapter = new Adapter(this, android.R.layout.simple_list_item_1, dogs);
+            ArrayAdapter<String> theAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, dogs);
             listView.setAdapter(theAdapter);
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
             {
 
                 @Override
@@ -91,7 +89,7 @@ public class MainActivity extends ActionBarActivity
                     listView.setAdapter(arrayAdapter);
                 }
 
-            });
+            });*/
         }
 
     }//End of onCreate
