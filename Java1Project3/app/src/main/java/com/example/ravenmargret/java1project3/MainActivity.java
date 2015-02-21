@@ -72,7 +72,7 @@ public class MainActivity extends ActionBarActivity
         lv.setAdapter(theAdaptor);
 
         LinearLayout portrait = (LinearLayout)findViewById(R.id.portraitView); //Setting for the hide or view
-        LinearLayout landscape = (LinearLayout)findViewById(R.id.landscapeView);
+        RelativeLayout landscape = (RelativeLayout)findViewById(R.id.landscapeView);
 
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
@@ -87,8 +87,8 @@ public class MainActivity extends ActionBarActivity
         {
             portrait.setVisibility(View.GONE);
             landscape.setVisibility(View.VISIBLE);
-           // ArrayAdapter<String>   = new ArrayAdapter(this, android.R.layout.simple_list_item_1, dogs);
-           // listView.setAdapter(theAdapter);
+            //ArrayAdapter<String>   = new ArrayAdapter(this, android.R.layout.simple_list_item_1, dogs);
+            //listView.setAdapter(theAdapter);
         }
 
         theSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
