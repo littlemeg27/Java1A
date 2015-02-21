@@ -29,4 +29,10 @@ public class Dogs
     public String getTemperament() {return temperament;}
     public String getAge() {return age;}
 
+    @Override
+    public String toString()
+    {
+        return "Breed: " + breed + "\n" + "Type: " + type + "\n" + "Hair Type: " + hairType +
+               "\n" + "Color: " + color + "\n" + "Temperament: " + temperament + "\n" + "Age: " + age;
+    }
 }
