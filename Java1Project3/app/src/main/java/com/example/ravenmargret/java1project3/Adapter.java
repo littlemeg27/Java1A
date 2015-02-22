@@ -63,12 +63,12 @@ public class Adapter extends BaseAdapter
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) //No recycled view create new
         {
-            convertView = LayoutInflater.from(mContext).inflate(R.layout.activity_main, parent, false);
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.custom_adaptor, parent, false);
         }
 
         Dogs item = getItem(position);
 
-        ((TextView) convertView.findViewById(R.id.textView2)).setText(item.getBreed());
+        ((TextView) convertView.findViewById(R.id.customAdaptorText)).setText(item.getBreed());
 
         return convertView;
     }

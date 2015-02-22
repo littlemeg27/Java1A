@@ -20,7 +20,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import org.w3c.dom.Text;
 import java.util.ArrayList;
-
 import static android.R.layout.simple_list_item_1;
 
 
@@ -46,12 +45,12 @@ public class MainActivity extends ActionBarActivity
 
         mContext = this;
         listView = (ListView)findViewById(R.id.listView);
-        breed = (TextView)findViewById(R.id.textView);
-//        type = (TextView)findViewById(R.id.type);
-//        hairType = (TextView)findViewById(R.id.hairType);
-        color = (TextView)findViewById(R.id.theDesc);
-//        temperament = (TextView)findViewById(R.id.temperament);
-//        age = (TextView)findViewById(R.id.age);
+        breed = (TextView)findViewById(R.id.breedText);
+        //type = (TextView)findViewById(R.id.type); //Some of these are not being used because I was showed toString
+        //hairType = (TextView)findViewById(R.id.hairType);
+        color = (TextView)findViewById(R.id.description);
+        //temperament = (TextView)findViewById(R.id.temperament);
+        //age = (TextView)findViewById(R.id.age);
 
         final ArrayList<Dogs> dogs = new ArrayList<Dogs>();
         if(dogs !=null)
@@ -65,12 +64,12 @@ public class MainActivity extends ActionBarActivity
             dogs.add(new Dogs("Airedale Terrier", "Terrier", "Wavy Coat", "Brown and Black", "Outgoing, Alert, Friendly", "11.5 Years"));
         }
 
-        ListView lv = (ListView) findViewById(R.id.listView);
+        ListView lv = (ListView)findViewById(R.id.listView);
         Adapter theAdaptor = new Adapter(MainActivity.this, dogs);
         lv.setAdapter(theAdaptor);
 
-        LinearLayout portrait = (LinearLayout)findViewById(R.id.portraitView); //Setting for the hide or view
-        RelativeLayout landscape = (RelativeLayout)findViewById(R.id.landscapeView);
+        LinearLayout portrait = (LinearLayout)findViewById(R.id.landscapeView); //Setting for the hide or view
+        RelativeLayout landscape = (RelativeLayout)findViewById(R.id.portraitView);
 
         portrait.setVisibility(View.VISIBLE);
         landscape.setVisibility(View.GONE);
