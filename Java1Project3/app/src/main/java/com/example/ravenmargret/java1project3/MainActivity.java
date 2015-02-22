@@ -18,9 +18,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import static android.R.layout.simple_list_item_1;
@@ -67,13 +65,15 @@ public class MainActivity extends ActionBarActivity
             dogs.add(new Dogs("Airedale Terrier", "Terrier", "Wavy Coat", "Brown and Black", "Outgoing, Alert, Friendly", "11.5 Years"));
         }
 
-        ListView lv = (ListView)findViewById(R.id.listView);
+        ListView lv = (ListView) findViewById(R.id.listView);
         Adapter theAdaptor = new Adapter(MainActivity.this, dogs);
         lv.setAdapter(theAdaptor);
 
         LinearLayout portrait = (LinearLayout)findViewById(R.id.portraitView); //Setting for the hide or view
         RelativeLayout landscape = (RelativeLayout)findViewById(R.id.landscapeView);
 
+        portrait.setVisibility(View.VISIBLE);
+        landscape.setVisibility(View.GONE);
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
         {
@@ -115,13 +115,6 @@ public class MainActivity extends ActionBarActivity
                 color.setText(selectedItem + "");
             }
         });
-
-
-        // Relitive layout for the landscape
-        // linear layout for portrate
-        // Hide and show the layouts based on the oriantation of the device
-        // GONE for removal and VISABLE for showing
-
 
     }//End of onCreate
 
