@@ -81,16 +81,8 @@ public class MainActivity extends ActionBarActivity
             theSpinner = (Spinner) findViewById(R.id.spinner);
             ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.spinnerArray, android.R.layout.simple_dropdown_item_1line);
             theSpinner.setAdapter(spinnerAdapter);
-        }
-        else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-        {
-            portrait.setVisibility(View.GONE);
-            landscape.setVisibility(View.VISIBLE);
-            //ArrayAdapter<String>   = new ArrayAdapter(this, android.R.layout.simple_list_item_1, dogs);
-            //listView.setAdapter(theAdapter);
-        }
-
-        theSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+            
+            theSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
@@ -104,6 +96,16 @@ public class MainActivity extends ActionBarActivity
 
             }
         });
+        }
+        else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            portrait.setVisibility(View.GONE);
+            landscape.setVisibility(View.VISIBLE);
+            //ArrayAdapter<String>   = new ArrayAdapter(this, android.R.layout.simple_list_item_1, dogs);
+            //listView.setAdapter(theAdapter);
+        }
+
+        
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
