@@ -79,33 +79,6 @@ public class MainActivity extends ActionBarActivity
             theSpinner = (Spinner) findViewById(R.id.spinner);
             ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.spinnerArray, android.R.layout.simple_dropdown_item_1line);
             theSpinner.setAdapter(spinnerAdapter);
-<<<<<<< Updated upstream
-            
-            theSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-                breed.setText(dogs.get(position).toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent)
-            {
-
-            }
-        });
-        }
-        else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
-        {
-            portrait.setVisibility(View.GONE);
-            landscape.setVisibility(View.VISIBLE);
-            //ArrayAdapter<String>   = new ArrayAdapter(this, android.R.layout.simple_list_item_1, dogs);
-            //listView.setAdapter(theAdapter);
-        }
-
-        
-=======
 
             theSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
             {
@@ -130,7 +103,6 @@ public class MainActivity extends ActionBarActivity
             //listView.setAdapter(theAdapter);
 
         }
->>>>>>> Stashed changes
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
