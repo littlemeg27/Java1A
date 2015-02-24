@@ -102,17 +102,16 @@ public class MainActivity extends ActionBarActivity
             //ArrayAdapter<String>   = new ArrayAdapter(this, android.R.layout.simple_list_item_1, dogs);
             //listView.setAdapter(theAdapter);
 
-        }
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
             {
-                String selectedItem = dogs.get(position).toString();
-                color.setText(selectedItem + "");
-            }
-        });
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    String selectedItem = dogs.get(position).toString();
+                    color.setText(selectedItem + "");
+                }
+            });
+        }
 
 
 
