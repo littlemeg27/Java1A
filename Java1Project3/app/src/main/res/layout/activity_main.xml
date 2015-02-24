@@ -10,7 +10,7 @@
         android:id="@+id/portraitView">
 
         <ListView
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:id="@+id/listView"
             android:layout_alignParentTop="true"
@@ -23,6 +23,8 @@
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/description"
+            android:layout_alignParentRight="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_gravity="center_horizontal" />
 
     </RelativeLayout>
