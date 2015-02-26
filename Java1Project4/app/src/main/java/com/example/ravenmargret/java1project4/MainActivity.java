@@ -1,3 +1,5 @@
+//Created Brenna Pavlinchak 2/25/2015
+
 package com.example.ravenmargret.java1project4;
 
 import android.app.ProgressDialog;
@@ -7,6 +9,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -45,7 +48,7 @@ public class MainActivity extends ActionBarActivity
         if(info !=null && info.isConnected())
         {
             MyTask myTask = new MyTask();
-            myTask.execute("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=m7yan8vjttevv849nkhyr3wp&q="+  +"&page_limit=10");
+            myTask.execute("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=m7yan8vjttevv849nkhyr3wp&q="+ enterMovie +"&page_limit=10");
             //+ variable for a search feature
             //If i move above line to another class now the heck do i make it work with a button variable?
         }
@@ -71,8 +74,8 @@ public class MainActivity extends ActionBarActivity
         @Override
         protected String doInBackground(String... params)
         {
-            String results = "";
-
+            String results = ""; //All this and below should be to collect string responses
+                                //According to what Donlan says in the video hope this code is right
             try
             {
                 URL url = new URL(params[0]);
@@ -94,6 +97,16 @@ public class MainActivity extends ActionBarActivity
             }
 
             return results;
+
+
+
+           JSONObject apiObject;
+
+           try
+           {
+              apiObject = new JSONObject(jsonString)
+           }
+
         }
 
         @Override
@@ -113,40 +126,9 @@ public class MainActivity extends ActionBarActivity
         {
             super.onPostExecute(s);
 
-            if(!s.equals("N/A"))
-            {
-                //Place code to handle JSON data
 
-                Toast.makeText(MainActivity.this, s, Toast.LENGTH_LONG).show();
-
-                JSONObject jsonObject;
-
-                try //Check network class
-                {
-                    jsonObject = new JSONObject(s);
-                    JSONArray jsonArray = jsonObject.getJSONObject("").getJSONArray("");
-
-                    for(int i = 0; i < jsonArray.length(); i++)
-                    {
-                        //Loop though JSON Array to add to an arraylist.
-                        //Add array to list view
-                    }
-                }
-                catch(JSONException e)
-                {
-                    e.printStackTrace();
-                }
-
-
-            }
-
-            dialog.cancel();
         }
 
-
-
-
     }
-
 
 }
