@@ -9,9 +9,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,21 +27,27 @@ import java.net.URL;
 
 public class MainActivity extends ActionBarActivity
 {
+    Button searchMovie;
+    EditText enterMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        //My API KEY m7yan8vjttevv849nkhyr3wp 
+        //My API KEY m7yan8vjttevv849nkhyr3wp
+        //or
+        //tvvcmnd7pfnt68u3achn5k86
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);//Check network class
 
         NetworkInfo info = manager.getActiveNetworkInfo();
         if(info !=null && info.isConnected())
         {
             MyTask myTask = new MyTask();
-            myTask.execute()
+            myTask.execute("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=m7yan8vjttevv849nkhyr3wp&q="+  +"&page_limit=10");
+            //+ variable for a search feature
+            //If i move above line to another class now the heck do i make it work with a button variable?
         }
 
     }
@@ -105,10 +116,34 @@ public class MainActivity extends ActionBarActivity
             if(!s.equals("N/A"))
             {
                 //Place code to handle JSON data
+
+                Toast.makeText(MainActivity.this, s, Toast.LENGTH_LONG).show();
+
+                JSONObject jsonObject;
+
+                try //Check network class
+                {
+                    jsonObject = new JSONObject(s);
+                    JSONArray jsonArray = jsonObject.getJSONObject("").getJSONArray("");
+
+                    for(int i = 0; i < jsonArray.length(); i++)
+                    {
+                        //Loop though JSON Array to add to an arraylist.
+                        //Add array to list view
+                    }
+                }
+                catch(JSONException e)
+                {
+                    e.printStackTrace();
+                }
+
+
             }
 
-            Toast.makeText(MainActivity.this, s, Toast.LENGTH_LONG).show();
+            dialog.cancel();
         }
+
+
 
 
     }
