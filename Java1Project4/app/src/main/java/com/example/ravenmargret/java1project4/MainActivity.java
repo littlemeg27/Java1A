@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity
                     if(info !=null && info.isConnected())
                     {
                         MyTask myTask = new MyTask();
-                        myTask.execute("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=m7yan8vjttevv849nkhyr3wp&q="+ enterMovie +"&page_limit=10");
+                        myTask.execute("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=m7yan8vjttevv849nkhyr3wp&q="+ enterMovie +"&page_limit=20");
                     }
                 }
                 catch(Exception e)
