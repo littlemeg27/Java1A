@@ -10,16 +10,11 @@ import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -71,11 +66,13 @@ public class MainActivity extends ActionBarActivity
             }
         });
 
-
-
     }
 
-    private class MyTask extends AsyncTask<String, Void, String>
+    private void updateDisplay(Movie movie)
+    {
+        ((TextView))//Updating the display with the new 
+    }
+    private class MyTask extends AsyncTask<String, Void, JSONObject>
     {
         final String TAG = "API DEMO AsyncTask";
 
@@ -93,7 +90,7 @@ public class MainActivity extends ActionBarActivity
         }
 
         @Override
-        protected String doInBackground(String... params)
+        protected JSONObject doInBackground(String... params)
         {
             String results = ""; //All this and below should be to collect string responses
                                 //According to what Donlan says in the video hope this code is right
@@ -120,7 +117,32 @@ public class MainActivity extends ActionBarActivity
 
             Log.i(TAG, "Received Data " + results);
 
-            return results;
+            JSONObject apiObject;
+
+            try
+            {
+                apiObject = new JSONObject(results);
+            }
+            catch(JSONException e)
+            {
+                Log.e(TAG, "Cannot convert API Response to JSON");
+                apiObject = null;
+            }
+
+            try
+            {
+                apiObject = (apiObject != null) ? apiObject.getJSONObject("movies"):null;
+                Log.i(TAG, "API JSON data received " + apiObject.toString());
+            }
+            catch(Exception e)
+            {
+                Log.e(TAG, "Could not parse data record from response " + apiObject.toString());
+                apiObject = null;
+            }
+
+            return apiObject;
+
+
 
 
 
@@ -132,28 +154,18 @@ public class MainActivity extends ActionBarActivity
             super.onProgressUpdate(values);
         }
 
-        @Override
-        protected void onCancelled(String s)
-        {
-            super.onCancelled(s);
-        }
 
         @Override
-        protected void onPostExecute(String s)
+        protected void onPostExecute(JSONObject apiObject)
         {
-            super.onPostExecute(s);
+            Movie endResult = new Movie(apiObject);
+
+            updateDisplay(endResult);
 
 
-            JSONObject apiObject;
 
-            try
-            {
-                apiObject = new JSONObject(results)
-            }
-            catch(JSONException e)
-            {
 
-            }
+            super.onPostExecute(apiObject);
 
 
 
