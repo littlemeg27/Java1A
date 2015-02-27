@@ -25,9 +25,9 @@ import java.util.ArrayList;
     {
 
         Context mContext;
-        ArrayList<MovieTitles> mObjects;
+        ArrayList<Movie> mObjects;
 
-        public Adapter(Context d, ArrayList<MovieTitles> objects)
+        public Adapter(Context d, ArrayList<Movie> objects)
         {
             mContext = d;
             mObjects = objects;
@@ -70,13 +70,14 @@ import java.util.ArrayList;
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
             if (convertView == null) //No recycled view create new
             {
                 convertView = LayoutInflater.from(mContext).inflate(R.layout.custom_adaptor, parent, false);
             }
 
-            MovieTitles item = getItem(position);
+            Movie item = getItem(position);
 
             ((TextView) convertView.findViewById(R.id.customAdaptorText)).setText(item.getTitle());
 

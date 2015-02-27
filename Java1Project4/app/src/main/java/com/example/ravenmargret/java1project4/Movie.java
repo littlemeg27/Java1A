@@ -2,25 +2,45 @@
 
 package com.example.ravenmargret.java1project4;
 
+import android.nfc.Tag;
+import android.util.Log;
+import org.json.JSONObject;
+
+import org.json.JSONObject;
+
 public class Movie
 {
-        private  String title; //All the private variables
+        final String TAG = "MOVIE CLASS";
 
+        private String mMovieTitle;
 
-        public Movie(String mTitle)
+        public Movie(){}
+
+        public Movie(String movieTitle)
         {
-            title = mTitle;
-
+           mMovieTitle = movieTitle;
         }
 
 
-        public String getTitle() {return title;}
-
-
-        @Override
-        public String toString()
+        public Movie(JSONObject movieInfo)
         {
-            return "Title: " + title;
+            try
+            {
+                mMovieTitle = movieInfo.getString("title");
+            }
+            catch(Exception e)
+            {
+                Log.e(TAG, "Error updating display");
+            }
         }
+
+        public String getString() {
+        return mMovieTitle;
+    }
+
+        public void setMovieTitle(String mMovieTitle) {
+        this.mMovieTitle = mMovieTitle;
+    }
+
 }
 

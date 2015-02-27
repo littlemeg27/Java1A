@@ -68,9 +68,9 @@ public class MainActivity extends ActionBarActivity
 
     }
 
-    private void updateDisplay(Movie movie)
+    private void updateDisplay(Movie movieTitle)
     {
-        ((TextView))//Updating the display with the new
+       // ((TextView))//Updating the display with the new
     }
     private class MyTask extends AsyncTask<String, Void, JSONObject>
     {
@@ -141,11 +141,6 @@ public class MainActivity extends ActionBarActivity
             }
 
             return apiObject;
-
-
-
-
-
         }
 
         @Override
@@ -162,13 +157,7 @@ public class MainActivity extends ActionBarActivity
 
             updateDisplay(endResult);
 
-
-
-
             super.onPostExecute(apiObject);
-
-
-
         }
 
     }
