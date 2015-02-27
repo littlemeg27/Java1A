@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
@@ -30,8 +32,7 @@ import java.net.URL;
 
 public class MainActivity extends ActionBarActivity
 {
-    Button searchMovie;
-    EditText enterMovie;
+    final String TAG = "API TEST";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,21 +43,41 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);//Check network class
 
-        NetworkInfo info = manager.getActiveNetworkInfo();
-        if(info !=null && info.isConnected())
+        Button searchButton = (Button)findViewById(R.id.searchButton);
+
+        searchButton.setOnClickListener(new View.OnClickListener()
         {
-            MyTask myTask = new MyTask();
-            myTask.execute("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=m7yan8vjttevv849nkhyr3wp&q="+ enterMovie +"&page_limit=10");
-            //+ variable for a search feature
-            //If i move above line to another class now the heck do i make it work with a button variable?
-        }
+            @Override
+            public void onClick(View v)
+            {
+                TextView enterMovie = (TextView)findViewById(R.id.enterMovie);
+                String movie = enterMovie.getText().toString();
+                try
+                {
+                    ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);//Check network class
+
+                    NetworkInfo info = manager.getActiveNetworkInfo();
+                    if(info !=null && info.isConnected())
+                    {
+                        MyTask myTask = new MyTask();
+                        myTask.execute("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=m7yan8vjttevv849nkhyr3wp&q="+ enterMovie +"&page_limit=10");
+                    }
+                }
+                catch(Exception e)
+                {
+                    Log.e(TAG, "Invalid query for movie: " + movie);
+                }
+            }
+        });
+
+
 
     }
 
     private class MyTask extends AsyncTask<String, Void, String>
     {
+        final String TAG = "API DEMO AsyncTask";
 
         ProgressDialog dialog = new ProgressDialog(MainActivity.this);
 
@@ -89,6 +110,7 @@ public class MainActivity extends ActionBarActivity
             {
                 e.printStackTrace();
                 results = "N/A";
+                //Log.e(TAG, "Could not create URL Connection to " + url.toString());
             }
             catch(IOException e)
             {
@@ -96,16 +118,11 @@ public class MainActivity extends ActionBarActivity
                 results = "N/A";
             }
 
+            Log.i(TAG, "Received Data " + results);
+
             return results;
 
 
-
-           JSONObject apiObject;
-
-           try
-           {
-              apiObject = new JSONObject(jsonString)
-           }
 
         }
 
@@ -125,6 +142,19 @@ public class MainActivity extends ActionBarActivity
         protected void onPostExecute(String s)
         {
             super.onPostExecute(s);
+
+
+            JSONObject apiObject;
+
+            try
+            {
+                apiObject = new JSONObject(results)
+            }
+            catch(JSONException e)
+            {
+
+            }
+
 
 
         }
