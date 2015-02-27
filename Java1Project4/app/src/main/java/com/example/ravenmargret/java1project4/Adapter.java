@@ -25,9 +25,9 @@ import java.util.ArrayList;
     {
 
         Context mContext;
-        ArrayList<Dogs> mObjects;
+        ArrayList<MovieTitles> mObjects;
 
-        public Adapter(Context d, ArrayList<Dogs> objects)
+        public Adapter(Context d, ArrayList<MovieTitles> objects)
         {
             mContext = d;
             mObjects = objects;
@@ -57,7 +57,7 @@ import java.util.ArrayList;
         }
 
         @Override
-        public Dogs getItem(int position)
+        public  getItem(int position)
         {
             if(mObjects != null && position < mObjects.size() && position >= 0)
             {
@@ -76,7 +76,7 @@ import java.util.ArrayList;
                 convertView = LayoutInflater.from(mContext).inflate(R.layout.custom_adaptor, parent, false);
             }
 
-            Dogs item = getItem(position);
+            MovieTitles item = getItem(position);
 
             ((TextView) convertView.findViewById(R.id.customAdaptorText)).setText(item.getTitle());
 

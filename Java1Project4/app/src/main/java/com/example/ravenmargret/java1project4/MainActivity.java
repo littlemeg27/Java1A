@@ -70,7 +70,7 @@ public class MainActivity extends ActionBarActivity
 
     private void updateDisplay(Movie movie)
     {
-        ((TextView))//Updating the display with the new 
+        ((TextView))//Updating the display with the new
     }
     private class MyTask extends AsyncTask<String, Void, JSONObject>
     {
