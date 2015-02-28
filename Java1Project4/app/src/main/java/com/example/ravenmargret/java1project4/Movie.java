@@ -10,37 +10,26 @@ import org.json.JSONObject;
 
 public class Movie
 {
-        final String TAG = "MOVIE CLASS";
+        String mMovieTitle;
 
-        private String mMovieTitle;
-
-        public Movie(){}
-
-        public Movie(String movieTitle)
-        {
-           mMovieTitle = movieTitle;
-        }
-
-
-        public Movie(JSONObject movieInfo)
-        {
-            try
-            {
-                mMovieTitle = movieInfo.getString("title");
-            }
-            catch(Exception e)
-            {
-                Log.e(TAG, "Error updating display");
-            }
-        }
-
-        public String getString() {
-        return mMovieTitle;
-    }
-
-        public void setMovieTitle(String mMovieTitle) {
+    public Movie(String mMovieTitle)
+    {
         this.mMovieTitle = mMovieTitle;
     }
 
-}
+    public String getmMovieTitle()
+    {
+        return mMovieTitle;
+    }
 
+    public void setmMovieTitle(String mMovieTitle)
+    {
+        this.mMovieTitle = mMovieTitle;
+    }
+
+    @Override
+    public String toString()
+    {
+        return mMovieTitle;
+    }
+}

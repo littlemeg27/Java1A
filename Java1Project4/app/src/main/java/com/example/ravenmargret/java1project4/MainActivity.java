@@ -9,12 +9,17 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,11 +28,18 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity
 {
     final String TAG = "API TEST";
+
+    ArrayList<Movie> movies = new ArrayList<Movie>();
+
+    ListView movieList;
+    TextView enterMovie;
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,15 +50,21 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mContext = this;
+
+
+        movieList = (ListView) findViewById(R.id.listView);
 
         Button searchButton = (Button)findViewById(R.id.searchButton);
 
+        enterMovie = (EditText) findViewById(R.id.enterMovie);
+
         searchButton.setOnClickListener(new View.OnClickListener()
+
         {
             @Override
             public void onClick(View v)
             {
-                TextView enterMovie = (TextView)findViewById(R.id.enterMovie);
                 String movie = enterMovie.getText().toString();
                 try
                 {
@@ -55,6 +73,7 @@ public class MainActivity extends ActionBarActivity
                     NetworkInfo info = manager.getActiveNetworkInfo();
                     if(info !=null && info.isConnected())
                     {
+                        movies.clear();
                         MyTask myTask = new MyTask();
                         myTask.execute("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=m7yan8vjttevv849nkhyr3wp&q="+ enterMovie +"&page_limit=20");
                     }
@@ -68,11 +87,9 @@ public class MainActivity extends ActionBarActivity
 
     }
 
-    private void updateDisplay(Movie movieTitle)
-    {
-       // ((TextView))//Updating the display with the new
-    }
-    private class MyTask extends AsyncTask<String, Void, JSONObject>
+
+
+    private class MyTask extends AsyncTask<String, Void, String>
     {
         final String TAG = "API DEMO AsyncTask";
 
@@ -90,57 +107,33 @@ public class MainActivity extends ActionBarActivity
         }
 
         @Override
-        protected JSONObject doInBackground(String... params)
+        protected String doInBackground(String... params)
         {
-            String results = ""; //All this and below should be to collect string responses
-                                //According to what Donlan says in the video hope this code is right
-            try
-            {
+            String result = "";
+
+            try {
                 URL url = new URL(params[0]);
-
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+
                 InputStream is = connection.getInputStream();
-                results = IOUtils.toString(is);
+
+                result = IOUtils.toString(is);
                 is.close();
-            }
-            catch(MalformedURLException e)
+
+            } catch (MalformedURLException e)
             {
                 e.printStackTrace();
-                results = "N/A";
-                //Log.e(TAG, "Could not create URL Connection to " + url.toString());
-            }
-            catch(IOException e)
+                Toast toast = Toast.makeText(MainActivity.this, "Could not find the movie try again", Toast.LENGTH_SHORT);
+                toast.show();
+            } catch (IOException e)
             {
                 e.printStackTrace();
-                results = "N/A";
+                Toast toast = Toast.makeText(MainActivity.this, "Could not find movie try again", Toast.LENGTH_SHORT);
+                toast.show();
             }
 
-            Log.i(TAG, "Received Data " + results);
-
-            JSONObject apiObject;
-
-            try
-            {
-                apiObject = new JSONObject(results);
-            }
-            catch(JSONException e)
-            {
-                Log.e(TAG, "Cannot convert API Response to JSON");
-                apiObject = null;
-            }
-
-            try
-            {
-                apiObject = (apiObject != null) ? apiObject.getJSONObject("movies"):null;
-                Log.i(TAG, "API JSON data received " + apiObject.toString());
-            }
-            catch(Exception e)
-            {
-                Log.e(TAG, "Could not parse data record from response " + apiObject.toString());
-                apiObject = null;
-            }
-
-            return apiObject;
+            return result;
         }
 
         @Override
@@ -151,15 +144,49 @@ public class MainActivity extends ActionBarActivity
 
 
         @Override
-        protected void onPostExecute(JSONObject apiObject)
+        protected void onPostExecute(String s)
         {
-            Movie endResult = new Movie(apiObject);
+            super.onPostExecute(s);
 
-            updateDisplay(endResult);
+            Log.e("JSON DATA", s);
+                try {
 
-            super.onPostExecute(apiObject);
+                    JSONArray mainJSON = new JSONArray(s);
+                    JSONArray childrenArray = mainJSON.getJSONArray(0);
+
+
+                    for (int i = 0; i < childrenArray.length(); i++)
+                    {
+                        JSONObject childrenObject = childrenArray.getJSONObject(i);
+                        String title;
+
+                        if (childrenObject.has("title"))
+                        {
+                            title = childrenObject.getString("title");
+                            Log.i("E:", title);
+                        }
+                        else
+                        {
+                            title = "N/A";
+                        }
+
+                        movies.add(new Movie(title));
+                    }
+
+                }
+                catch (JSONException e)
+                {
+                    Toast toast = Toast.makeText(MainActivity.this, "Something Happened", Toast.LENGTH_SHORT);
+                    toast.show();
+
+                }
+
+                CustomAdapter adaptor = new CustomAdapter(mContext, movies);
+                movieList.setAdapter(adaptor);
+                dialog.cancel();
+
+            }
+
         }
-
-    }
 
 }
